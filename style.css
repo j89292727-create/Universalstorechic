@@ -1,0 +1,92 @@
+body { font-family: sans-serif; margin: 0; background: #f4f4f4; text-align: center; }
+header { 
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('vitrine.jpg');
+    background-size: cover; /* L'image couvre tout l'espace */
+    background-position: center; /* Centre la photo */
+    color: #fff; 
+    padding: 60px 20px; /* Plus d'espace pour bien voir la vitrine */
+    text-align: center;
+    border-bottom: 3px solid #e67e22;
+}
+
+header h1 {
+    font-size: 2.2em;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8); /* Ombre pour lire sur la photo */
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+nav ul { list-style: none; padding: 0; display: flex; justify-content: center; background: #1a1a1a; margin: 0; }
+nav ul li a { color: #fff; text-decoration: none; padding: 15px; display: block; font-size: 12px; text-transform: uppercase; }
+
+.container { padding: 20px; max-width: 1000px; margin: auto; }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+.product-card { background: #fff; padding: 10px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.product-card img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; }
+
+/* STYLE DES TAILLES */
+.badge-taille { background: #fff3e6; color: #e67e22; font-weight: bold; font-size: 11px; padding: 3px 8px; border-radius: 5px; display: inline-block; margin: 5px 0; border: 1px solid #e67e22; }
+
+/* STYLE DU VERROU LINGERIE */
+#lingerie-wrapper { position: relative; min-height: 400px; }
+.verrouille .product-grid { filter: blur(25px); pointer-events: none; user-select: none; }
+.lock-card { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100; background: white; padding: 30px; border: 3px solid #e67e22; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.lock-card button { background: #e67e22; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+/* MODAL */
+.modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; align-items:center; justify-content:center; }
+.modal-content { background:white; padding:30px; border-radius:20px; width:80%; }
+
+.whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+/* DESCRIPTION ACCUEIL */
+.description-accueil { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-top: 5px solid #e67e22; margin-top: 10px; }
+
+/* CARTES PRODUITS */
+.desc-texte { font-size: 13px; color: #666; margin: 8px 0; }
+.prix-rouge { color: #d63031; font-weight: bold; font-size: 1.1em; }
+.badge-taille { background: #fff3e6; color: #e67e22; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 4px; border: 1px solid #e67e22; margin-bottom: 5px; display: inline-block; }
+.btn-achat { background: #25d366; color: white; display: block; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+
+/* SÉCURITÉ LINGERIE SEULEMENT */
+.verrouille .product-grid { filter: blur(25px); pointer-events: none; }
+.lock-card { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100; background: white; padding: 25px; border: 2px solid #e67e22; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 80%; }
+.lock-card button { background: #e67e22; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+
+/* INFOS FIN DE PAGE */
+.info-box-finale { background: #1a1a1a; color: white; padding: 30px; border-radius: 15px; text-align: left; margin-top: 40px; }
+.info-box-finale h2 { color: #e67e22; border-bottom: 1px solid #333; padding-bottom: 10px; }
+/* --- NAVIGATION REVISITÉE --- */
+nav ul { 
+    list-style: none; 
+    padding: 10px 5px; 
+    display: flex; 
+    justify-content: center; 
+    flex-wrap: wrap; /* Permet de passer à la ligne si c'est trop long */
+    background: #1a1a1a; 
+    margin: 0; 
+    gap: 5px; /* Espace entre les boutons */
+}
+
+nav ul li {
+    margin: 2px;
+}
+
+nav ul li a { 
+    color: #fff; 
+    text-decoration: none; 
+    padding: 8px 12px; 
+    display: block; 
+    font-size: 11px; /* Légèrement plus petit pour que ça tienne */
+    text-transform: uppercase; 
+    border: 1px solid #333; /* Un petit cadre discret */
+    border-radius: 5px;
+    background: #222;
+}
+
+/* On donne une couleur spéciale au bouton Partager pour le distinguer */
+nav ul li a[onclick] {
+    border-color: #e67e22;
+    color: #e67e22;
+}
+

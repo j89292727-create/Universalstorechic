@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Store Chic Mode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="age-gate" class="modal-overlay">
+        <div class="modal-content">
+            <h1 style="font-size:50px">🔞</h1>
+            <h3>VÉRIFICATION D'ÂGE</h3>
+            <p>Cette section est réservée aux adultes (18+). Confirmez-vous votre âge ?</p>
+            <button onclick="confirmerAge()" style="background:#25d366; color:white; border:none; padding:15px 30px; border-radius:10px; font-weight:bold; cursor:pointer;">OUI, J'AI +18 ANS</button>
+            <button onclick="fermerModal()" style="background:#ccc; border:none; padding:10px; margin-top:10px; display:block; width:100%; cursor:pointer;">NON, RETOUR</button>
+        </div>
+    </div>
+
+    <header>
+    <h1>Universal Store Chic Mode</h1>
+    <p style="text-shadow: 1px 1px 5px #000;">L'élégance à l'état pur</p>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#femmes">Femmes</a></li>
+        <li><a href="#hommes">Hommes</a></li>
+        <li><a href="#accessoires">Accessoires</a></li>
+        <li><a href="#lingerie">Lingerie</a></li>
+        <li><a href="#" onclick="partagerSite()">📤 Partager</a></li>
+    </ul>
+</nav>
+
+
+    </header>
+
+    <section class="container">
+        <div class="description-accueil">
+            <h2>Bienvenue chez Universal Store Chic Mode</h2>
+            <p>Votre destination privilégiée au <strong>Cameroun</strong> pour une mode audacieuse et élégante. Nous sélectionnons avec passion le meilleur du style pour vous sublimer au quotidien.</p>
+            <p style="color:#e67e22; font-weight:bold;">✨ Qualité Premium • Service Client Réactif • Style Inégalé</p>
+        </div>
+    </section>
+
+    <section id="femmes" class="container">
+        <h2>Mode Féminine</h2>
+        <div class="product-grid" id="grid-femmes"></div>
+    </section>
+
+    <section id="hommes" class="container">
+        <h2>Mode Masculine</h2>
+        <div class="product-grid" id="grid-hommes"></div>
+    </section>
+
+    <section id="accessoires" class="container">
+        <h2>Accessoires & Maroquinerie</h2>
+        <div class="product-grid" id="grid-accessoires"></div>
+    </section>
+
+    <section id="lingerie" class="container">
+        <h2>Lingerie Chic</h2>
+        <div id="lingerie-wrapper" class="verrouille">
+            <div id="cadenas-orange" class="lock-card">
+                <span style="font-size:50px">🔒</span>
+                <p>Contenu privé réservé aux adultes</p>
+                <button onclick="ouvrirModal()">DÉVERROUILLER</button>
+            </div>
+            <div class="product-grid" id="grid-lingerie"></div>
+        </div>
+    </section>
+
+    <section id="infos" class="container">
+        <div class="info-box-finale">
+            <h2>📍 Notre Localisation & Services</h2>
+            <p><strong>Adresse :</strong> Douala, Cameroun (Livraison partout dans le pays).</p>
+            <p><strong>🚀 Livraison :</strong> 24h à Douala et Yaoundé. Expédition en agence pour les autres villes.</p>
+            <p><strong>💰 Paiement :</strong> Cash à la livraison, Orange Money ou MTN MoMo.</p>
+            <p><strong>📞 Contact direct :</strong> 691405697</p>
+        </div>
+    </section>
+
+    <footer style="padding:20px; color:#888; font-size:12px;">
+        &copy; 2026 Universal Store Chic Mode. Tous droits réservés.
+    </footer>
+
+    <a href="https://wa.me/237691405697" class="whatsapp-float"><span>Contactez-nous</span></a>
+
+    <script src="script.js"></script>
+</body>
+</html>
