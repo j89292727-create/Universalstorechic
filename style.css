@@ -1,92 +1,417 @@
-body { font-family: sans-serif; margin: 0; background: #f4f4f4; text-align: center; }
-header { 
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('vitrine.jpg');
-    background-size: cover; /* L'image couvre tout l'espace */
-    background-position: center; /* Centre la photo */
-    color: #fff; 
-    padding: 60px 20px; /* Plus d'espace pour bien voir la vitrine */
-    text-align: center;
-    border-bottom: 3px solid #e67e22;
-}
-
-header h1 {
-    font-size: 2.2em;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.8); /* Ombre pour lire sur la photo */
+/* Reset & Fonts */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+body {
+    background-color: #f4f4f4;
+    padding-bottom: 70px;
+}
+/* Header */
+.main-header {
+    background: #fff;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.logo {
+    font-weight: bold;
+    color: #ff4747;
+    font-size: 1.2rem;
+}
+.search-bar {
+    flex: 1;
+    margin: 0 15px;
+    display: flex;
+    background: #f0f0f0;
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+.search-bar input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    outline: none;
+}
+.search-bar button {
+    border: none;
+    background: transparent;
+    color: #666;
+    cursor: pointer;
+}
+/* Banner */
+.hero-banner {
+    background: linear-gradient(45deg, #ff4747, #ff8e53);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin: 10px;
+    border-radius: 10px;
+}
+/* Grille de produits style AliExpress */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+}
+.product-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.product-img {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+}
+.product-img img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.discount {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: #ff4747;
+    color: white;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    border-radius: 3px;
+}
+.product-info {
+    padding: 8px;
+}
+.product-info .title {
+    font-size: 0.85rem;
+    height: 34px;
+    overflow: hidden;
+    color: #333;
+}
+.product-info .price {
+    color: #ff4747;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 5px 0;
+}
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 0.75rem;
+}
+.shipping {
+    font-size: 0.7rem;
+    color: #00a65a;
+}
+.rating {
+    font-size: 0.65rem;
+    color: #ffb400;
+}
+/* Navigation Mobile */
+.mobile-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+.mobile-nav a {
+    text-decoration: none;
+    color: #666;
+    text-align: center;
+}
+.mobile-nav a i {
+    display: block;
+    font-size: 1.2rem;
+}
+.mobile-nav a span {
+    font-size: 0.7rem;
+}
+.mobile-nav a.active {
+    color: #ff4747;
+}
+.badge-promo {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #ff4747;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    z-index: 10;
+}
+:root {
+    --or-luxe: #D4AF37;
+    --noir: #1a1a1a;
+    --rouge: #ff4747;
+    --blanc: #ffffff;
+    --gris-clair: #f4f4f4;
+}
+header {
+    background: var(--blanc);
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+    height: 30px;
+}
+.logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.3rem;
+    font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
+    white-space: nowrap;
+    width: auto;
 }
-
-nav ul { list-style: none; padding: 0; display: flex; justify-content: center; background: #1a1a1a; margin: 0; }
-nav ul li a { color: #fff; text-decoration: none; padding: 15px; display: block; font-size: 12px; text-transform: uppercase; }
-
-.container { padding: 20px; max-width: 1000px; margin: auto; }
-.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-.product-card { background: #fff; padding: 10px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-.product-card img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; }
-
-/* STYLE DES TAILLES */
-.badge-taille { background: #fff3e6; color: #e67e22; font-weight: bold; font-size: 11px; padding: 3px 8px; border-radius: 5px; display: inline-block; margin: 5px 0; border: 1px solid #e67e22; }
-
-/* STYLE DU VERROU LINGERIE */
-#lingerie-wrapper { position: relative; min-height: 400px; }
-.verrouille .product-grid { filter: blur(25px); pointer-events: none; user-select: none; }
-.lock-card { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100; background: white; padding: 30px; border: 3px solid #e67e22; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-.lock-card button { background: #e67e22; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-
-/* MODAL */
-.modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; align-items:center; justify-content:center; }
-.modal-content { background:white; padding:30px; border-radius:20px; width:80%; }
-
-.whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-/* DESCRIPTION ACCUEIL */
-.description-accueil { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-top: 5px solid #e67e22; margin-top: 10px; }
-
-/* CARTES PRODUITS */
-.desc-texte { font-size: 13px; color: #666; margin: 8px 0; }
-.prix-rouge { color: #d63031; font-weight: bold; font-size: 1.1em; }
-.badge-taille { background: #fff3e6; color: #e67e22; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 4px; border: 1px solid #e67e22; margin-bottom: 5px; display: inline-block; }
-.btn-achat { background: #25d366; color: white; display: block; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; }
-
-/* SÉCURITÉ LINGERIE SEULEMENT */
-.verrouille .product-grid { filter: blur(25px); pointer-events: none; }
-.lock-card { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100; background: white; padding: 25px; border: 2px solid #e67e22; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 80%; }
-.lock-card button { background: #e67e22; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; }
-
-/* INFOS FIN DE PAGE */
-.info-box-finale { background: #1a1a1a; color: white; padding: 30px; border-radius: 15px; text-align: left; margin-top: 40px; }
-.info-box-finale h2 { color: #e67e22; border-bottom: 1px solid #333; padding-bottom: 10px; }
-/* --- NAVIGATION REVISITÉE --- */
-nav ul { 
-    list-style: none; 
-    padding: 10px 5px; 
-    display: flex; 
-    justify-content: center; 
-    flex-wrap: wrap; /* Permet de passer à la ligne si c'est trop long */
-    background: #1a1a1a; 
-    margin: 0; 
-    gap: 5px; /* Espace entre les boutons */
+.logo span {
+    color: var(--or-luxe);
 }
-
-nav ul li {
-    margin: 2px;
+.search-container {
+    background: #eee;
+    border-radius: 20px;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
 }
-
-nav ul li a { 
-    color: #fff; 
-    text-decoration: none; 
-    padding: 8px 12px; 
-    display: block; 
-    font-size: 11px; /* Légèrement plus petit pour que ça tienne */
-    text-transform: uppercase; 
-    border: 1px solid #333; /* Un petit cadre discret */
+.search-container input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    outline: none;
+    margin-left: 10px;
+    font-size: 0.9rem;
+}
+.categories {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px 15px;
+    background: white;
+    scrollbar-width: none;
+}
+.categories::-webkit-scrollbar {
+    display: none;
+}
+.cat-item {
+    padding: 8px 18px;
+    background: #f0f0f0;
+    border-radius: 20px;
+    white-space: nowrap;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.cat-item.active {
+    background: var(--noir);
+    color: var(--or-luxe);
+    border-color: var(--noir);
+}
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 15px;
+}
+.card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.badge-promo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--rouge);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 3px 8px;
     border-radius: 5px;
-    background: #222;
+    z-index: 5;
 }
-
-/* On donne une couleur spéciale au bouton Partager pour le distinguer */
-nav ul li a[onclick] {
-    border-color: #e67e22;
-    color: #e67e22;
+.badge-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--or-luxe);
+    color: black;
+    font-size: 0.6rem;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 5px;
+    z-index: 5;
 }
-
+.card-body {
+    padding: 12px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.card-title {
+    font-size: 0.85rem;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+.card-desc {
+    font-size: 0.7rem;
+    color: #777;
+    margin-bottom: 8px;
+    height: 32px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.2;
+}
+.price-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+.current-price {
+    color: var(--rouge);
+    font-weight: bold;
+    font-size: 1rem;
+}
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 0.8rem;
+}
+.add-btn {
+    width: 100%;
+    background: var(--noir);
+    color: var(--or-luxe);
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    padding: 25px;
+    border-radius: 15px;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 2000;
+    transition: 0.4s;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.cart-overlay.open {
+    right: 0;
+}
+.checkout-btn {
+    background: #25D366;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    border-radius: 35px;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px;
+    border-top: 1px solid #ddd;
+    z-index: 1500;
+}
+.nav-link {
+    text-align: center;
+    color: #777;
+    font-size: 0.7rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+.nav-link i {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 3px;
+}
+.nav-link.active {
+    color: var(--or-luxe);
+}
