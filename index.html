@@ -3,89 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Store Chic Mode</title>
+    <title>Universal Store Chic Mode | Boutique Officielle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="age-gate" class="modal-overlay">
+    <header>
+        <div class="top-header">
+            <div onclick="toggleCart()" style="cursor:pointer; position: relative;">
+                <i class="fas fa-shopping-bag" style="font-size:1.4rem;"></i>
+                <span id="cart-count" style="position:absolute; top:-5px; right:-8px; background:#ff4747; color:white; font-size:0.6rem; padding:2px 5px; border-radius:50%; display:none;">0</span>
+            </div>
+
+            <div class="logo">Universal<span>Store</span></div>
+
+            <div onclick="toggleAbout()" style="cursor:pointer;">
+                <i class="fas fa-info-circle" style="font-size:1.4rem; color: #ccc;"></i>
+            </div>
+        </div>
+        <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Rechercher sur Universal Store..." onkeyup="search()">
+        </div>
+    </header>
+
+    <div class="categories">
+        <div class="cat-item active" onclick="filterCat('Tout', this)">Tout</div>
+        <div class="cat-item" onclick="filterCat('Lingerie', this)">Lingerie</div>
+        <div class="cat-item" onclick="filterCat('Homme', this)">Homme</div>
+        <div class="cat-item" onclick="filterCat('Femme', this)">Femme</div>
+    </div>
+
+    <div id="loader" style="text-align:center; padding:50px; color:#999;">
+        <i class="fas fa-spinner fa-spin"></i> Connexion à la Turquie...
+    </div>
+
+    <main class="products-grid" id="product-container"></main>
+
+    <div id="sizeModal" class="modal">
         <div class="modal-content">
-            <h1 style="font-size:50px">🔞</h1>
-            <h3>VÉRIFICATION D'ÂGE</h3>
-            <p>Cette section est réservée aux adultes (18+). Confirmez-vous votre âge ?</p>
-            <button onclick="confirmerAge()" style="background:#25d366; color:white; border:none; padding:15px 30px; border-radius:10px; font-weight:bold; cursor:pointer;">OUI, J'AI +18 ANS</button>
-            <button onclick="fermerModal()" style="background:#ccc; border:none; padding:10px; margin-top:10px; display:block; width:100%; cursor:pointer;">NON, RETOUR</button>
+            <span class="close-modal" onclick="toggleSize()">&times;</span>
+            <h3 style="margin-bottom:15px; color:#D4AF37;">Guide des Tailles</h3>
+            <table style="width:100%; border-collapse:collapse;">
+                <tr style="background:#f9f9f9;">
+                    <th style="padding:10px; border:1px solid #ddd;">Turquie</th>
+                    <th style="padding:10px; border:1px solid #ddd;">Cameroun</th>
+                </tr>
+                <tr><td style="padding:8px; border:1px solid #ddd; text-align:center;">36 - 38</td><td style="padding:8px; border:1px solid #ddd; text-align:center;">S / M</td></tr>
+                <tr><td style="padding:8px; border:1px solid #ddd; text-align:center;">40 - 42</td><td style="padding:8px; border:1px solid #ddd; text-align:center;">L / XL</td></tr>
+                <tr><td style="padding:8px; border:1px solid #ddd; text-align:center;">44 - 46</td><td style="padding:8px; border:1px solid #ddd; text-align:center;">XXL</td></tr>
+            </table>
         </div>
     </div>
 
-    <header>
-    <h1>Universal Store Chic Mode</h1>
-    <p style="text-shadow: 1px 1px 5px #000;">L'élégance à l'état pur</p>
-</header>
-
-<nav>
-    <ul>
-        <li><a href="#femmes">Femmes</a></li>
-        <li><a href="#hommes">Hommes</a></li>
-        <li><a href="#accessoires">Accessoires</a></li>
-        <li><a href="#lingerie">Lingerie</a></li>
-        <li><a href="#" onclick="partagerSite()">📤 Partager</a></li>
-    </ul>
-</nav>
-
-
-    </header>
-
-    <section class="container">
-        <div class="description-accueil">
-            <h2>Bienvenue chez Universal Store Chic Mode</h2>
-            <p>Votre destination privilégiée au <strong>Cameroun</strong> pour une mode audacieuse et élégante. Nous sélectionnons avec passion le meilleur du style pour vous sublimer au quotidien.</p>
-            <p style="color:#e67e22; font-weight:bold;">✨ Qualité Premium • Service Client Réactif • Style Inégalé</p>
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleAbout()">&times;</span>
+            <h3 style="color:#D4AF37; margin-bottom:10px;">Universal Store Chic Mode</h3>
+            <p style="font-size:0.9rem; line-height:1.6; color:#444;">
+                <strong>Universal Store</strong> est votre destination pour la mode premium de Turquie. 
+                <br><br>
+                Qualité exceptionnelle en lingerie, costumes et prêt-à-porter chic.
+                <br><br>
+                📍 Douala, Cameroun.
+            </p>
         </div>
-    </section>
+    </div>
 
-    <section id="femmes" class="container">
-        <h2>Mode Féminine</h2>
-        <div class="product-grid" id="grid-femmes"></div>
-    </section>
-
-    <section id="hommes" class="container">
-        <h2>Mode Masculine</h2>
-        <div class="product-grid" id="grid-hommes"></div>
-    </section>
-
-    <section id="accessoires" class="container">
-        <h2>Accessoires & Maroquinerie</h2>
-        <div class="product-grid" id="grid-accessoires"></div>
-    </section>
-
-    <section id="lingerie" class="container">
-        <h2>Lingerie Chic</h2>
-        <div id="lingerie-wrapper" class="verrouille">
-            <div id="cadenas-orange" class="lock-card">
-                <span style="font-size:50px">🔒</span>
-                <p>Contenu privé réservé aux adultes</p>
-                <button onclick="ouvrirModal()">DÉVERROUILLER</button>
+    <div id="cart-overlay" class="cart-overlay">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:15px; border-bottom:1px solid #eee;">
+            <h3>Mon Panier</h3>
+            <i class="fas fa-times" onclick="toggleCart()" style="font-size:1.5rem; cursor:pointer;"></i>
+        </div>
+        <div id="cart-items-list" style="flex:1; overflow-y:auto; padding:15px 0;"></div>
+        <div style="border-top:1px solid #eee; padding-top:15px;">
+            <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.2rem; margin-bottom:15px;">
+                <span>Total:</span>
+                <span id="cart-total" style="color:#ff4747;">0 FCFA</span>
             </div>
-            <div class="product-grid" id="grid-lingerie"></div>
+            <a href="#" onclick="sendWhatsApp()" class="checkout-btn">Finaliser sur WhatsApp</a>
         </div>
-    </section>
+    </div>
 
-    <section id="infos" class="container">
-        <div class="info-box-finale">
-            <h2>📍 Notre Localisation & Services</h2>
-            <p><strong>Adresse :</strong> Douala, Cameroun (Livraison partout dans le pays).</p>
-            <p><strong>🚀 Livraison :</strong> 24h à Douala et Yaoundé. Expédition en agence pour les autres villes.</p>
-            <p><strong>💰 Paiement :</strong> Cash à la livraison, Orange Money ou MTN MoMo.</p>
-            <p><strong>📞 Contact direct :</strong> 691405697</p>
-        </div>
-    </section>
-
-    <footer style="padding:20px; color:#888; font-size:12px;">
-        &copy; 2026 Universal Store Chic Mode. Tous droits réservés.
-    </footer>
-
-    <a href="https://wa.me/237691405697" class="whatsapp-float"><span>Contactez-nous</span></a>
+    <nav class="bottom-nav">
+        <div class="nav-link active" onclick="location.reload()"><i class="fas fa-home"></i>Accueil</div>
+        <div class="nav-link" onclick="toggleSize()"><i class="fas fa-ruler"></i>Tailles</div>
+        <div class="nav-link" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i>Panier</div>
+        <div class="nav-link" onclick="toggleAbout()"><i class="fas fa-store"></i>Infos</div>
+    </nav>
 
     <script src="script.js"></script>
 </body>
