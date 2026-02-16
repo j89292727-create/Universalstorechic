@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Store Chic Mode | Boutique Officielle</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --or-luxe: #D4AF37; --noir: #1a1a1a; --rouge: #ff4747; --blanc: #ffffff; --gris: #f4f4f4; --amazon: #232f3e; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: var(--gris); padding-bottom: 80px; }
+
+        header { background: var(--blanc); padding: 15px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .nav-top { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
+        .logo span { color: var(--or-luxe); }
+        
+        .search-bar { background: #eee; border-radius: 20px; padding: 8px 15px; display: flex; align-items: center; margin-top: 10px; }
+        .search-bar input { border: none; background: transparent; width: 100%; outline: none; margin-left: 10px; font-size: 0.8rem; }
+
+        /* Grille Produits */
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 10px; }
+        .card { background: white; border-radius: 8px; overflow: hidden; position: relative; display: flex; flex-direction: column; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .card-media { width: 100%; height: 210px; object-fit: cover; background: #f9f9f9; }
+        
+        /* Badges & Pinterest */
+        .badge { position: absolute; top: 8px; left: 8px; background: var(--or-luxe); color: black; font-size: 0.6rem; font-weight: bold; padding: 2px 6px; border-radius: 3px; z-index: 10; }
+        .pin-btn { position: absolute; top: 8px; right: 8px; background: #bd081c; color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.75rem; z-index: 10; opacity: 0.9; }
+
+        .card-info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 0.8rem; font-weight: bold; color: #333; margin-bottom: 4px; }
+        .card-desc { font-size: 0.68rem; color: #777; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.2; }
+        
+        .price-box { margin-top: auto; display: flex; align-items: baseline; gap: 5px; }
+        .new-price { font-weight: bold; color: var(--noir); font-size: 0.9rem; }
+        .old-price { text-decoration: line-through; color: #999; font-size: 0.75rem; }
+
+        .btn { width: 100%; border: none; padding: 10px; margin-top: 8px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.68rem; text-transform: uppercase; text-align: center; text-decoration: none; display: block; }
+        .btn-wa { background: var(--noir); color: var(--or-luxe); }
+        .btn-aff { background: var(--amazon); color: white; }
+
+        /* Navigation Basse */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px; border-top: 1px solid #eee; z-index: 1500; }
+        .nav-item { text-align: center; color: #888; font-size: 0.65rem; cursor: pointer; text-decoration: none; flex: 1; }
+        .nav-item i { display: block; font-size: 1.2rem; margin-bottom: 3px; }
+        .nav-item.active { color: var(--or-luxe); }
+
+        /* Modals */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 20px; }
+        .modal-content { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 12px; position: relative; max-height: 80vh; overflow-y: auto; }
+        .close-modal { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer; }
+        .menu-link { display: block; padding: 15px 0; border-bottom: 1px solid #eee; text-decoration: none; color: #333; font-weight: bold; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-top">
+        <div onclick="toggleModal('categoryModal')"><i class="fas fa-bars"></i></div>
+        <div class="logo">Universal<span>Store</span></div>
+        <div onclick="toggleCart()"><i class="fas fa-shopping-bag"></i></div>
+    </div>
+    <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Rechercher une pépite..." onkeyup="search()">
+    </div>
+</header>
+
+<main class="grid" id="product-container"></main>
+
+<div id="categoryModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="toggleModal('categoryModal')">&times;</span>
+        <h2 style="color:var(--or-luxe); margin-bottom:15px; font-size: 1.1rem;">NOS RAYONS</h2>
+        <a href="#" class="menu-link" onclick="filterCat('Homme')">🕺 Homme</a>
+        <a href="#" class="menu-link" onclick="filterCat('Femme')">💃 Femme</a>
+        <a href="#" class="menu-link" onclick="filterCat('Accessoires')">💎 Accessoires</a>
+        <a href="#" class="menu-link" onclick="filterCat('Lingerie')">✨ Lingerie</a>
+        <a href="#" class="menu-link" onclick="render(allProducts);toggleModal('categoryModal')" style="color:var(--or-luxe)">Voir Tout</a>
+    </div>
+</div>
+
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="toggleModal('infoModal')">&times;</span>
+        <h2 style="color:var(--or-luxe); margin-bottom:15px; font-size: 1.1rem;">INFOS & À PROPOS</h2>
+        <div style="font-size:0.85rem; line-height: 1.6; color:#444;">
+            <p style="margin-bottom: 10px;"><strong>Universal Store Chic Mode</strong> : Votre boutique de luxe accessible au Cameroun. Nous proposons des articles premium importés de Turquie.</p>
+            <p>📍 <strong>Boutique :</strong> Douala, Cameroun</p>
+            <p>🚚 <strong>Livraison :</strong> Express 24h (Douala) / Agences de voyage (National)</p>
+            <p>💬 <strong>WhatsApp :</strong> 694 85 95 75</p>
+        </div>
+    </div>
+</div>
+
+<div id="cart-overlay" class="modal" style="background: rgba(0,0,0,0.5);">
+    <div class="modal-content" style="margin-right: 0; height: 100vh; max-width: 320px; border-radius: 0; position: fixed; right: 0; top: 0;">
+        <span class="close-modal" onclick="toggleCart()">&times;</span>
+        <h2>Mon Panier</h2>
+        <div id="cart-items" style="margin: 20px 0;"></div>
+        <div id="total-price" style="font-weight: bold; margin-bottom: 20px; border-top: 1px solid #eee; padding-top: 10px;"></div>
+        <button class="btn btn-wa" onclick="sendWhatsApp()">Commander via WhatsApp</button>
+    </div>
+</div>
+
+<nav class="bottom-nav">
+    <div class="nav-item active" onclick="location.reload()"><i class="fas fa-home"></i>Accueil</div>
+    <div class="nav-item" onclick="toggleCart()"><i class="fas fa-shopping-bag"></i>Panier</div>
+    <div class="nav-item" onclick="toggleModal('infoModal')"><i class="fas fa-ellipsis-h"></i>Plus</div>
+</nav>
+
+<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+<script>
+    const sheetID = '18jFMzCOtK20OltdGBVizAqhEMgJXbwOYqCdmEVSgkW8';
+    const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
+    let allProducts = [], cart = [];
+
+    async function load() {
+        try {
+            const res = await fetch(url);
+            const txt = await res.text();
+            const rows = JSON.parse(txt.substr(47).slice(0, -2)).table.rows;
+            allProducts = rows.map(r => ({
+                name: r.c[0]?.v || '', 
+                price: r.c[1]?.v || 0, 
+                cat: r.c[2]?.v || '',
+                img: r.c[3]?.v || '', 
+                tag: r.c[4]?.v || '', 
+                oldP: r.c[5]?.v || null, 
+                desc: r.c[6]?.v || '', 
+                aff: r.c[7]?.v || null  
+            }));
+            render(allProducts);
+        } catch(e) { console.error("Erreur Sheets"); }
+    }
+
+    function render(data) {
+        const container = document.getElementById('product-container');
+        container.innerHTML = data.map(p => {
+            const pinLink = `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(location.href)}&media=${encodeURIComponent(p.img)}&description=${encodeURIComponent(p.name)}`;
+            return `
+                <div class="card">
+                    ${p.tag ? `<div class="badge">${p.tag}</div>` : ''}
+                    <a href="${pinLink}" target="_blank" class="pin-btn" title="Épingler"><i class="fab fa-pinterest"></i></a>
+                    <img src="${p.img}" class="card-media" loading="lazy">
+                    <div class="card-info">
+                        <div class="card-title">${p.name}</div>
+                        <div class="card-desc">${p.desc}</div>
+                        <div class="price-box">
+                            <span class="new-price">${p.price.toLocaleString()} FCFA</span>
+                            ${p.oldP ? `<span class="old-price">${p.oldP.toLocaleString()} FCFA</span>` : ''}
+                        </div>
+                        ${p.aff ? `<a href="${p.aff}" target="_blank" class="btn btn-aff">Voir l'offre</a>` : 
+                                 `<button class="btn btn-wa" onclick="add('${p.name.replace(/'/g,"")}',${p.price})">Ajouter</button>`}
+                    </div>
+                </div>`;
+        }).join('');
+    }
+
+    function add(n,p) { cart.push({n,p}); upd(); toggleCart(); }
+    function upd() {
+        const list = document.getElementById('cart-items');
+        list.innerHTML = cart.map((i,idx) => `
+            <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:10px; background:#f5f5f5; padding:8px; border-radius:5px;">
+                <span>${i.n}</span>
+                <i class="fas fa-trash" style="color:var(--rouge)" onclick="cart.splice(${idx},1);upd()"></i>
+            </div>`).join('');
+        document.getElementById('total-price').innerText = "Total: " + cart.reduce((s,i)=>s+i.p,0).toLocaleString() + " FCFA";
+    }
+
+    function filterCat(c) { render(allProducts.filter(p => p.cat === c)); toggleModal('categoryModal'); }
+    function toggleModal(id) { const m = document.getElementById(id); m.style.display = (m.style.display==='flex')?'none':'flex'; }
+    function toggleCart() { const c = document.getElementById('cart-overlay'); c.style.display = (c.style.display==='flex')?'none':'flex'; }
+    function search() { const v = document.getElementById('searchInput').value.toLowerCase(); render(allProducts.filter(p=>p.name.toLowerCase().includes(v))); }
+    
+    function sendWhatsApp() {
+        if(!cart.length) return;
+        let m = "Bonjour *Universal Store*, je souhaite commander :\n" + cart.map(i=>"- "+i.n).join("\n") + "\n\n*Total : " + cart.reduce((s,i)=>s+i.p,0).toLocaleString() + " FCFA*";
+        window.location.href = `https://wa.me/237694859575?text=${encodeURIComponent(m)}`;
+    }
+    
+    load();
+</script>
+</body>
+</html>
