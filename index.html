@@ -3,189 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Store Chic Mode | Boutique Officielle</title>
-    
-    <meta property="og:title" content="Universal Store Chic Mode">
-    <meta property="og:description" content="L'élégance à votre portée. Boutique premium et affiliation mode.">
-    <meta property="og:type" content="website">
-    <meta name="pinterest" content="nopin" />
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Universal Store chic mode</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --or-luxe: #D4AF37; --noir: #1a1a1a; --rouge: #ff4747; --blanc: #ffffff; --gris: #f4f4f4; --amazon: #232f3e; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: var(--gris); padding-bottom: 70px; scroll-behavior: smooth; }
+        :root {
+            --primary: #121212; /* Noir Profond */
+            --accent: #c5a059;  /* Or Satiné */
+            --accent-light: #e2c99a;
+            --bg: #ffffff;
+            --card-bg: #ffffff;
+        }
 
-        header { background: var(--blanc); padding: 15px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .nav-top { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
-        .logo span { color: var(--or-luxe); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Playfair Display', 'Segoe UI', serif; }
+        body { background: var(--bg); color: var(--primary); padding-bottom: 90px; }
+
+        /* HEADER CHIC */
+        header { 
+            background: white; padding: 20px 15px; position: sticky; top: 0; z-index: 100; 
+            display: flex; justify-content: space-between; align-items: center; 
+            box-shadow: 0 1px 0px rgba(0,0,0,0.05);
+            border-bottom: 2px solid var(--accent);
+        }
+        .logo { font-weight: 900; font-size: 1.2rem; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); }
         
-        .search-bar { background: #eee; border-radius: 20px; padding: 8px 15px; display: flex; align-items: center; margin-top: 10px; }
-        .search-bar input { border: none; background: transparent; width: 100%; outline: none; margin-left: 10px; font-size: 0.8rem; }
+        .cart-icon { position: relative; cursor: pointer; font-size: 1.4rem; color: var(--primary); }
+        #cart-count { 
+            position: absolute; top: -5px; right: -8px; background: var(--accent); color: white; 
+            font-size: 0.65rem; padding: 2px 5px; border-radius: 50%; font-weight: bold;
+        }
 
-        /* Grille Produits */
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 10px; }
-        .card { background: white; border-radius: 8px; overflow: hidden; position: relative; display: flex; flex-direction: column; }
-        .card-media { width: 100%; height: 200px; object-fit: cover; background: #f9f9f9; }
-        .badge { position: absolute; top: 8px; left: 8px; background: var(--or-luxe); color: black; font-size: 0.6rem; font-weight: bold; padding: 2px 6px; border-radius: 3px; }
-        .pin-btn { position: absolute; top: 8px; right: 8px; background: #bd081c; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.8rem; }
-
-        .card-info { padding: 10px; flex-grow: 1; display: flex; flex-direction: column; }
-        .card-title { font-size: 0.75rem; font-weight: bold; margin-bottom: 5px; color: #333; }
-        .price { font-weight: bold; color: var(--noir); font-size: 0.85rem; margin-top: auto; }
+        /* GRILLE DE PRODUITS */
+        .container { 
+            padding: 20px 15px; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); 
+            gap: 20px; 
+        }
+        .card { 
+            background: var(--card-bg); 
+            border-radius: 4px; 
+            overflow: hidden; 
+            transition: transform 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+        .card:active { transform: scale(0.98); }
+        .card img, .card video { width: 100%; height: 230px; object-fit: cover; }
         
-        .btn { width: 100%; border: none; padding: 10px; margin-top: 8px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.65rem; text-transform: uppercase; text-align: center; text-decoration: none; display: block; }
-        .btn-wa { background: var(--noir); color: var(--or-luxe); }
-        .btn-aff { background: var(--amazon); color: white; }
+        .card-info { padding: 12px; text-align: center; }
+        .card-title { 
+            font-size: 0.8rem; 
+            font-weight: 500; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            margin-bottom: 8px;
+            height: 32px;
+            overflow: hidden;
+        }
+        .price { color: var(--accent); font-weight: bold; font-size: 1rem; margin-bottom: 12px; }
+        
+        .btn-add { 
+            display: block; 
+            background: var(--primary); 
+            color: white; 
+            text-align: center; 
+            padding: 12px; 
+            border-radius: 0px; 
+            text-decoration: none; 
+            font-size: 0.75rem; 
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer; 
+            border: none; 
+            width: 100%;
+            transition: 0.3s;
+        }
 
-        /* Modals Universels */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 20px; }
-        .modal-content { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 12px; position: relative; max-height: 80vh; overflow-y: auto; }
-        .modal-content h2 { color: var(--or-luxe); font-size: 1.1rem; margin-bottom: 15px; text-transform: uppercase; }
-        .close-modal { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer; }
+        /* NAVIGATION BASSE */
+        .nav-bottom { 
+            position: fixed; bottom: 0; width: 100%; background: white; 
+            display: flex; justify-content: space-around; padding: 15px 0; z-index: 100; 
+            border-top: 1px solid #eee;
+        }
+        .nav-item { text-align: center; font-size: 0.7rem; cursor: pointer; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-item i { font-size: 1.2rem; display: block; color: var(--primary); margin-bottom: 5px; }
 
-        /* Menu de navigation bas */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px; border-top: 1px solid #eee; z-index: 1500; }
-        .nav-item { text-align: center; color: #888; font-size: 0.6rem; cursor: pointer; text-decoration: none; }
-        .nav-item i { display: block; font-size: 1.2rem; margin-bottom: 3px; }
-        .nav-item.active { color: var(--or-luxe); }
+        /* MODALS */
+        .modal { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(255,255,255,0.98); display: none; align-items: center; justify-content: center; z-index: 1000;
+        }
+        .modal-content { background: white; width: 100%; height: 100%; padding: 40px 25px; position: relative; overflow-y: auto; }
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--primary); }
+        
+        .modal h2 { 
+            font-size: 1.5rem; 
+            margin-bottom: 30px; 
+            text-align: center; 
+            letter-spacing: 4px; 
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 10px;
+        }
+
+        /* CART ITEMS */
+        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #f5f5f5; }
+        .remove-item { color: #888; cursor: pointer; margin-left: 10px; }
+        .total { font-weight: bold; font-size: 1.4rem; margin-top: 30px; text-align: center; letter-spacing: 2px; }
+        
+        .whatsapp-btn { 
+            background: #25d366 !important; 
+            margin-top: 25px; 
+            font-weight: bold; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="nav-top">
-        <div onclick="toggleModal('menuModal')"><i class="fas fa-bars"></i></div>
-        <div class="logo">Universal<span>Store</span></div>
-        <div onclick="toggleCart()"><i class="fas fa-shopping-bag"></i><span id="cart-count"></span></div>
-    </div>
-    <div class="search-bar">
-        <i class="fas fa-search"></i>
-        <input type="text" id="searchInput" placeholder="Rechercher une pépite..." onkeyup="search()">
-    </div>
-</header>
+    <header>
+        <div onclick="openModal('catModal')"><i class="fas fa-align-left"></i></div>
+        <div class="logo">Universal Store</div>
+        <div class="cart-icon" onclick="openModal('cartModal')">
+            <i class="fas fa-shopping-bag"></i>
+            <span id="cart-count">0</span>
+        </div>
+    </header>
 
-<main class="grid" id="product-container"></main>
+    <div class="container" id="catalog">
+        <p style="grid-column: 1/-1; text-align: center; padding: 50px; letter-spacing: 2px;">COLLECTION EN CHARGEMENT...</p>
+    </div>
 
-<div id="menuModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="toggleModal('menuModal')">&times;</span>
-        <h2>Menu Boutique</h2>
-        <div style="text-align: left; line-height: 2.5;">
-            <p onclick="toggleModal('aboutModal')"><i class="fas fa-store"></i> À Propos de Nous</p>
-            <p onclick="toggleModal('shippingModal')"><i class="fas fa-truck"></i> Livraison & Délais</p>
-            <p onclick="toggleModal('careModal')"><i class="fas fa-sparkles"></i> Conseils d'Entretien</p>
-            <p onclick="toggleModal('legalModal')"><i class="fas fa-user-shield"></i> Confidentialité & Affiliation</p>
-            <hr>
-            <p style="font-size: 0.8rem; color: #888;">Universal Store v2.0 - 2026</p>
+    <nav class="nav-bottom">
+        <div class="nav-item" onclick="window.scrollTo({top:0, behavior:'smooth'})"><i class="fas fa-home"></i>Accueil</div>
+        <div class="nav-item" onclick="openModal('aboutModal')"><i class="fas fa-history"></i>Histoire</div>
+        <div class="nav-item" onclick="openModal('plusModal')"><i class="fas fa-concierge-bell"></i>Services</div>
+    </nav>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('cartModal')">&times;</span>
+            <h2>Votre Sélection</h2>
+            <div id="cart-items"></div>
+            <div class="total" id="cart-total">0 FCFA</div>
+            <button class="btn-add whatsapp-btn" onclick="sendWhatsApp()">
+                Finaliser sur WhatsApp
+            </button>
         </div>
     </div>
-</div>
 
-<div id="aboutModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="toggleModal('aboutModal')">&times;</span>
-        <h2>Notre Histoire</h2>
-        <p style="font-size:0.85rem; color:#555; text-align: justify;">
-            <strong>Universal Store Chic Mode</strong> est né de la passion pour le luxe accessible. Nous sélectionnons des pièces uniques de Turquie et collaborons avec des plateformes mondiales pour offrir le meilleur du chic à nos clients, qu'ils soient à Douala ou ailleurs.
-        </p>
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('aboutModal')">&times;</span>
+            <h2>Notre Histoire</h2>
+            <div style="text-align: center; line-height: 1.8; color: #444;">
+                <p><strong>Universal Store chic mode</strong> incarne l'élégance moderne au Cameroun.</p>
+                <p style="margin: 20px 0;">Chaque pièce de notre catalogue est le fruit d'une sélection rigoureuse, dédiée à ceux qui exigent le meilleur du style et de la qualité.</p>
+                <p>Notre promesse : vous offrir une expérience shopping exclusive et personnalisée.</p>
+            </div>
+        </div>
     </div>
-</div>
 
-<div id="careModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="toggleModal('careModal')">&times;</span>
-        <h2>Soin & Éclat</h2>
-        <p style="font-size:0.85rem; color:#555; text-align: left;">
-            - <strong>Bijoux & Cristaux :</strong> Évitez le parfum direct et l'eau. Nettoyez avec un chiffon sec.<br>
-            - <strong>Tissus Premium :</strong> Lavage à froid recommandé pour préserver les fibres turques.
-        </p>
+    <div id="plusModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('plusModal')">&times;</span>
+            <h2>Services Privés</h2>
+            <ul style="list-style: none; line-height: 3; text-align: center; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">
+                <li><i class="fas fa-shipping-fast" style="color:var(--accent)"></i> Livraison Express 24h</li>
+                <li><i class="fas fa-cut" style="color:var(--accent)"></i> Conseil en Style</li>
+                <li><i class="fas fa-credit-card" style="color:var(--accent)"></i> Paiement Sécurisé</li>
+                <li><i class="fas fa-headset" style="color:var(--accent)"></i> Assistance +237 694859575</li>
+            </ul>
+        </div>
     </div>
-</div>
 
-<div id="legalModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="toggleModal('legalModal')">&times;</span>
-        <h2>Affiliation & Données</h2>
-        <p style="font-size:0.75rem; color:#666; text-align: left;">
-            Ce site participe au Programme Partenaires d'Amazon et Rakuten. Pour certains articles, nous percevons une commission si vous effectuez un achat. Vos données personnelles ne sont jamais stockées sur nos serveurs.
-        </p>
+    <div id="catModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('catModal')">&times;</span>
+            <h2>Collections</h2>
+            <div style="text-align: center; display: flex; flex-direction: column; gap: 20px; margin-top: 30px;">
+                <div onclick="filterCat('Lingerie')" style="font-size: 1.2rem; letter-spacing: 2px; cursor:pointer;">LINGERIE CHIC</div>
+                <div onclick="filterCat('Homme')" style="font-size: 1.2rem; letter-spacing: 2px; cursor:pointer;">MODE HOMME</div>
+                <div onclick="filterCat('Femme')" style="font-size: 1.2rem; letter-spacing: 2px; cursor:pointer;">MODE FEMME</div>
+                <div onclick="location.reload()" style="font-size: 1.2rem; letter-spacing: 2px; cursor:pointer; color:var(--accent);">TOUT VOIR</div>
+            </div>
+        </div>
     </div>
-</div>
 
-<div id="cart-overlay" class="modal" style="background: rgba(0,0,0,0.5);">
-    <div class="modal-content" style="margin-right: 0; height: 100vh; max-width: 300px; border-radius: 0;">
-        <span class="close-modal" onclick="toggleCart()">&times;</span>
-        <h2>Mon Panier</h2>
-        <div id="cart-items" style="margin: 20px 0;"></div>
-        <div id="total-price" style="font-weight: bold; margin-bottom: 20px;"></div>
-        <button class="btn btn-wa" onclick="sendWhatsApp()">Commander (WhatsApp)</button>
-    </div>
-</div>
+    <script>
+        const sheetID = '18jFMzCOtK20OltdGBVizAqhEMgJXbwOYqCdmEVSgkW8'; 
+        const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
+        
+        let allProducts = [];
+        let cart = [];
 
-<nav class="bottom-nav">
-    <div class="nav-item active" onclick="location.reload()"><i class="fas fa-home"></i>Accueil</div>
-    <div class="nav-item" onclick="toggleCart()"><i class="fas fa-shopping-bag"></i>Panier</div>
-    <div class="nav-item" onclick="toggleModal('menuModal')"><i class="fas fa-ellipsis-h"></i>Plus</div>
-</nav>
+        async function loadProducts() {
+            try {
+                const res = await fetch(url);
+                const text = await res.text();
+                const json = JSON.parse(text.substr(47).slice(0, -2));
+                allProducts = json.table.rows.map(row => ({
+                    titre: row.c[0]?.v || "Pièce Unique",
+                    prix: row.c[1]?.v || 0,
+                    image: row.c[2]?.v || "https://via.placeholder.com/400x600",
+                    cat: row.c[3]?.v || "Nouveauté"
+                }));
+                display(allProducts);
+            } catch (e) { 
+                document.getElementById('catalog').innerHTML = "<p style='text-align:center;'>Vérifiez la connexion à votre catalogue.</p>";
+            }
+        }
 
-<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
-<script>
-    const sheetID = '18jFMzCOtK20OltdGBVizAqhEMgJXbwOYqCdmEVSgkW8';
-    const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
-    let allProducts = [], cart = [];
-
-    async function load() {
-        try {
-            const res = await fetch(url);
-            const txt = await res.text();
-            const rows = JSON.parse(txt.substr(47).slice(0, -2)).table.rows;
-            allProducts = rows.map(r => ({
-                name: r.c[0]?.v || '', price: r.c[1]?.v || 0, cat: r.c[2]?.v || '',
-                img: r.c[3]?.v || '', tag: r.c[4]?.v || '', oldP: r.c[5]?.v || null,
-                desc: r.c[6]?.v || '', aff: r.c[7]?.v || null
-            }));
-            render(allProducts);
-            document.getElementById('loader')?.remove();
-        } catch(e) { console.error("Erreur sheet"); }
-    }
-
-    function render(data) {
-        const container = document.getElementById('product-container');
-        container.innerHTML = data.map(p => {
-            const isVid = p.img.toLowerCase().endsWith('.mp4');
-            const pin = `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(location.href)}&media=${encodeURIComponent(p.img)}&description=${encodeURIComponent(p.name)}`;
-            return `
+        function display(products) {
+            document.getElementById('catalog').innerHTML = products.map((p, index) => `
                 <div class="card">
-                    ${p.tag ? `<div class="badge">${p.tag}</div>` : ''}
-                    <a href="${pin}" target="_blank" class="pin-btn"><i class="fab fa-pinterest"></i></a>
-                    ${isVid ? `<video src="${p.img}" class="card-media" autoplay muted loop playsinline></video>` : `<img src="${p.img}" class="card-media" loading="lazy">`}
+                    ${p.image.includes('.mp4') ? `<video src="${p.image}" autoplay muted loop playsinline></video>` : `<img src="${p.image}" loading="lazy">`}
                     <div class="card-info">
-                        <div class="card-title">${p.name}</div>
-                        <div class="price">${p.price.toLocaleString()} FCFA</div>
-                        ${p.aff ? `<a href="${p.aff}" target="_blank" class="btn btn-aff">Voir l'offre</a>` : `<button class="btn btn-wa" onclick="add('${p.name.replace(/'/g,"")}',${p.price})">Ajouter</button>`}
+                        <div class="card-title">${p.titre}</div>
+                        <div class="price">${p.prix} FCFA</div>
+                        <button class="btn-add" onclick="addToCart(${index})">Ajouter au Panier</button>
                     </div>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(index) {
+            cart.push(allProducts[index]);
+            updateCart();
+            const btn = event.target;
+            btn.innerText = "AJOUTÉ";
+            btn.style.background = "#c5a059";
+            setTimeout(() => { btn.innerText = "Ajouter au Panier"; btn.style.background = "#121212"; }, 800);
+        }
+
+        function updateCart() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const container = document.getElementById('cart-items');
+            if (cart.length === 0) {
+                container.innerHTML = "<p style='text-align:center; color:#999; margin-top:50px;'>Votre panier est vide.</p>";
+                document.getElementById('cart-total').innerText = "0 FCFA";
+                return;
+            }
+            let total = 0;
+            container.innerHTML = cart.map((item, i) => {
+                total += parseInt(item.prix);
+                return `<div class="cart-item">
+                    <span style="font-size:0.8rem;">${item.titre}</span>
+                    <span style="font-size:0.8rem; font-weight:bold;">${item.prix} FCFA <i class="fas fa-times remove-item" onclick="removeFromCart(${i})"></i></span>
                 </div>`;
-        }).join('');
-    }
+            }).join('');
+            document.getElementById('cart-total').innerText = `${total} FCFA`;
+        }
 
-    function add(n,p) { cart.push({n,p}); upd(); toggleCart(); }
-    function upd() {
-        const list = document.getElementById('cart-items');
-        list.innerHTML = cart.map((i,idx) => `<div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:10px;"><span>${i.n}</span><i class="fas fa-trash" onclick="cart.splice(${idx},1);upd()"></i></div>`).join('');
-        document.getElementById('total-price').innerText = "Total: " + cart.reduce((s,i)=>s+i.p,0).toLocaleString() + " FCFA";
-    }
+        function removeFromCart(i) { cart.splice(i, 1); updateCart(); }
 
-    function toggleModal(id) { const m = document.getElementById(id); m.style.display = (m.style.display==='flex')?'none':'flex'; }
-    function toggleCart() { const c = document.getElementById('cart-overlay'); c.style.display = (c.style.display==='flex')?'none':'flex'; }
-    function search() { const v = document.getElementById('searchInput').value.toLowerCase(); render(allProducts.filter(p=>p.name.toLowerCase().includes(v))); }
-    function sendWhatsApp() {
-        if(!cart.length) return;
-        let m = "Bonjour *Universal Store*, ma sélection :\n" + cart.map(i=>"- "+i.n).join("\n");
-        window.location.href = `https://wa.me/237694859575?text=${encodeURIComponent(m)}`;
-    }
-    load();
-</script>
+        function sendWhatsApp() {
+            if (cart.length === 0) return;
+            let msg = "Bonjour Universal Store, je souhaite commander ces pièces :\n\n";
+            cart.forEach(item => msg += `• ${item.titre} - ${item.prix} FCFA\n`);
+            msg += `\nTotal : ${document.getElementById('cart-total').innerText}`;
+            window.open(`https://wa.me/237694859575?text=${encodeURIComponent(msg)}`);
+        }
+
+        function filterCat(c) { display(allProducts.filter(p => p.cat === c)); closeModal('catModal'); }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+        loadProducts();
+    </script>
 </body>
 </html>
