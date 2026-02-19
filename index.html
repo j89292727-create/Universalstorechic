@@ -3,191 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Store chic mode</title>
+    <title>Universal Store | Curation Mode Chic & Luxe</title>
+    <meta name="description" content="Découvrez une sélection exclusive de mode haut de gamme. Universal Store chic mode : l'élégance intemporelle pour homme et femme.">
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=Montserrat:wght@300;500&display=swap');
+
         :root {
-            --primary: #121212; /* Noir Profond */
+            --primary: #121212;
             --accent: #c5a059;  /* Or Satiné */
-            --accent-light: #e2c99a;
             --bg: #ffffff;
-            --card-bg: #ffffff;
+            --text-light: #666;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Playfair Display', 'Segoe UI', serif; }
-        body { background: var(--bg); color: var(--primary); padding-bottom: 90px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--bg); 
+            color: var(--primary); 
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
 
-        /* HEADER CHIC */
+        h1, h2, .logo { font-family: 'Playfair Display', serif; }
+
+        /* HEADER SOPHISTIQUÉ */
         header { 
-            background: white; padding: 20px 15px; position: sticky; top: 0; z-index: 100; 
+            background: white; padding: 25px 20px; position: sticky; top: 0; z-index: 100; 
             display: flex; justify-content: space-between; align-items: center; 
-            box-shadow: 0 1px 0px rgba(0,0,0,0.05);
-            border-bottom: 2px solid var(--accent);
+            border-bottom: 1px solid #eee;
         }
-        .logo { font-weight: 900; font-size: 1.2rem; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); }
+        .logo { font-weight: 900; font-size: 1.4rem; letter-spacing: 4px; text-transform: uppercase; }
         
-        .cart-icon { position: relative; cursor: pointer; font-size: 1.4rem; color: var(--primary); }
-        #cart-count { 
-            position: absolute; top: -5px; right: -8px; background: var(--accent); color: white; 
-            font-size: 0.65rem; padding: 2px 5px; border-radius: 50%; font-weight: bold;
+        .menu-trigger { cursor: pointer; font-size: 1.2rem; }
+
+        /* GRILLE DE CURATION */
+        .container { 
+            max-width: 1200px; margin: 0 auto;
+            padding: 30px 15px; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Plus grand pour le luxe */
+            gap: 40px; 
         }
 
-        /* GRILLE DE PRODUITS */
-        .container { 
-            padding: 20px 15px; 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); 
-            gap: 20px; 
-        }
         .card { 
             background: var(--card-bg); 
-            border-radius: 4px; 
-            overflow: hidden; 
-            transition: transform 0.3s ease;
-            border: 1px solid #f0f0f0;
+            transition: all 0.4s ease;
+            cursor: pointer;
         }
-        .card:active { transform: scale(0.98); }
-        .card img, .card video { width: 100%; height: 230px; object-fit: cover; }
+        .card:hover { transform: translateY(-5px); }
         
-        .card-info { padding: 12px; text-align: center; }
-        .card-title { 
-            font-size: 0.8rem; 
-            font-weight: 500; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            margin-bottom: 8px;
-            height: 32px;
-            overflow: hidden;
-        }
-        .price { color: var(--accent); font-weight: bold; font-size: 1rem; margin-bottom: 12px; }
+        .img-container { overflow: hidden; position: relative; height: 400px; background: #f9f9f9; }
+        .card img, .card video { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .card:hover img { transform: scale(1.05); }
         
-        .btn-add { 
-            display: block; 
-            background: var(--primary); 
-            color: white; 
-            text-align: center; 
-            padding: 12px; 
-            border-radius: 0px; 
-            text-decoration: none; 
-            font-size: 0.75rem; 
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer; 
-            border: none; 
-            width: 100%;
-            transition: 0.3s;
+        .card-info { padding: 20px 0; text-align: left; }
+        .card-cat { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 5px; }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 10px; }
+        .price { font-weight: 300; font-size: 1rem; color: var(--text-light); }
+        
+        /* BOUTON D'AFFILIATION */
+        .btn-view { 
+            display: inline-block; margin-top: 15px;
+            padding: 10px 0; border-bottom: 1px solid var(--primary);
+            text-decoration: none; color: var(--primary); font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: 2px;
         }
 
-        /* NAVIGATION BASSE */
+        /* NAVIGATION BASSE ÉPURÉE */
         .nav-bottom { 
             position: fixed; bottom: 0; width: 100%; background: white; 
-            display: flex; justify-content: space-around; padding: 15px 0; z-index: 100; 
-            border-top: 1px solid #eee;
+            display: flex; justify-content: space-around; padding: 15px 0; 
+            border-top: 1px solid #eee; z-index: 100;
         }
-        .nav-item { text-align: center; font-size: 0.7rem; cursor: pointer; color: #888; text-transform: uppercase; letter-spacing: 1px; }
-        .nav-item i { font-size: 1.2rem; display: block; color: var(--primary); margin-bottom: 5px; }
+        .nav-item { text-align: center; font-size: 0.6rem; cursor: pointer; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-item i { font-size: 1.1rem; display: block; color: var(--primary); margin-bottom: 4px; }
 
-        /* MODALS */
+        /* MODALS LUXE */
         .modal { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(255,255,255,0.98); display: none; align-items: center; justify-content: center; z-index: 1000;
+            background: white; display: none; z-index: 1000; overflow-y: auto;
         }
-        .modal-content { background: white; width: 100%; height: 100%; padding: 40px 25px; position: relative; overflow-y: auto; }
-        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--primary); }
+        .modal-content { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        .close-modal { position: fixed; top: 20px; right: 25px; font-size: 1.5rem; cursor: pointer; z-index: 1100; }
         
-        .modal h2 { 
-            font-size: 1.5rem; 
-            margin-bottom: 30px; 
-            text-align: center; 
-            letter-spacing: 4px; 
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--accent);
-            padding-bottom: 10px;
-        }
+        .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        @media (max-width: 768px) { .modal-grid { grid-template-columns: 1fr; } }
 
-        /* CART ITEMS */
-        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #f5f5f5; }
-        .remove-item { color: #888; cursor: pointer; margin-left: 10px; }
-        .total { font-weight: bold; font-size: 1.4rem; margin-top: 30px; text-align: center; letter-spacing: 2px; }
-        
-        .whatsapp-btn { 
-            background: #25d366 !important; 
-            margin-top: 25px; 
-            font-weight: bold; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px; 
+        .btn-buy { 
+            display: block; width: 100%; background: var(--primary); color: white; 
+            padding: 18px; text-align: center; text-decoration: none;
+            margin-top: 20px; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;
         }
+        .btn-wa { background: transparent; border: 1px solid #25d366; color: #25d366; }
+
+        .about-text { max-width: 600px; margin: 0 auto; text-align: center; }
+        .about-text p { margin-bottom: 20px; font-size: 1.1rem; color: #444; }
     </style>
 </head>
 <body>
 
     <header>
-        <div onclick="openModal('catModal')"><i class="fas fa-align-left"></i></div>
+        <div class="menu-trigger" onclick="openModal('catModal')"><i class="fas fa-bars"></i></div>
         <div class="logo">Universal Store</div>
-        <div class="cart-icon" onclick="openModal('cartModal')">
-            <i class="fas fa-shopping-bag"></i>
-            <span id="cart-count">0</span>
-        </div>
-    </header>
+        <div style="width: 20px;"></div> </header>
 
     <div class="container" id="catalog">
-        <p style="grid-column: 1/-1; text-align: center; padding: 50px; letter-spacing: 2px;">COLLECTION EN CHARGEMENT...</p>
+        <p style="grid-column: 1/-1; text-align: center; padding: 100px; letter-spacing: 5px; text-transform: uppercase; font-size: 0.7rem;">Curation en cours...</p>
     </div>
 
     <nav class="nav-bottom">
         <div class="nav-item" onclick="window.scrollTo({top:0, behavior:'smooth'})"><i class="fas fa-home"></i>Accueil</div>
-        <div class="nav-item" onclick="openModal('aboutModal')"><i class="fas fa-history"></i>Histoire</div>
-        <div class="nav-item" onclick="openModal('plusModal')"><i class="fas fa-concierge-bell"></i>Services</div>
+        <div class="nav-item" onclick="openModal('aboutModal')"><i class="fas fa-leaf"></i>L'Esprit</div>
+        <div class="nav-item" onclick="openModal('catModal')"><i class="fas fa-search"></i>Explorer</div>
     </nav>
 
-    <div id="cartModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('cartModal')">&times;</span>
-            <h2>Votre Sélection</h2>
-            <div id="cart-items"></div>
-            <div class="total" id="cart-total">0 FCFA</div>
-            <button class="btn-add whatsapp-btn" onclick="sendWhatsApp()">
-                Finaliser sur WhatsApp
-            </button>
-        </div>
+    <div id="productModal" class="modal">
+        <span class="close-modal" onclick="closeModal('productModal')">&times;</span>
+        <div class="modal-content" id="product-detail">
+            </div>
     </div>
 
     <div id="aboutModal" class="modal">
+        <span class="close-modal" onclick="closeModal('aboutModal')">&times;</span>
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('aboutModal')">&times;</span>
-            <h2>Notre Histoire</h2>
-            <div style="text-align: center; line-height: 1.8; color: #444;">
-                <p><strong>Universal Store chic mode</strong> incarne l'élégance moderne au Cameroun.</p>
-                <p style="margin: 20px 0;">Chaque pièce de notre catalogue est le fruit d'une sélection rigoureuse, dédiée à ceux qui exigent le meilleur du style et de la qualité.</p>
-                <p>Notre promesse : vous offrir une expérience shopping exclusive et personnalisée.</p>
+            <h2 style="text-align: center; margin-bottom: 40px; letter-spacing: 5px;">NOTRE MANIFESTE</h2>
+            <div class="about-text">
+                <p><strong>Universal Store chic mode</strong> n'est pas une simple boutique, c'est un filtre vers l'excellence.</p>
+                <p>Nous sélectionnons les pièces qui définissent l'élégance contemporaine, alliant savoir-faire artisanal et design intemporel.</p>
+                <p>Notre mission : élever votre vestiaire par une curation rigoureuse auprès des plus grandes maisons de mode internationales.</p>
             </div>
         </div>
     </div>
 
-    <div id="plusModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('plusModal')">&times;</span>
-            <h2>Services Privés</h2>
-            <ul style="list-style: none; line-height: 3; text-align: center; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">
-                <li><i class="fas fa-shipping-fast" style="color:var(--accent)"></i> Livraison Express 24h</li>
-                <li><i class="fas fa-cut" style="color:var(--accent)"></i> Conseil en Style</li>
-                <li><i class="fas fa-credit-card" style="color:var(--accent)"></i> Paiement Sécurisé</li>
-                <li><i class="fas fa-headset" style="color:var(--accent)"></i> Assistance +237 694859575</li>
-            </ul>
-        </div>
-    </div>
-
     <div id="catModal" class="modal">
+        <span class="close-modal" onclick="closeModal('catModal')">&times;</span>
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('catModal')">&times;</span>
-            <h2>Collections</h2>
-            <div style="text-align: center; display: flex; flex-direction: column; gap: 20px; margin-top: 30px;">
-                <div onclick="filterCat('Lingerie')" style="font-size: 1.2rem; letter-spacing: 2px; cursor:pointer;">LINGERIE CHIC</div>
-                <div onclick="filterCat('Homme')" style="font-size: 1.2rem; letter-spacing: 2px; cursor:pointer;">MODE HOMME</div>
-                <div onclick="filterCat('Femme')" style="font-size: 1.2rem; letter-spacing: 2px; cursor:pointer;">MODE FEMME</div>
-                <div onclick="location.reload()" style="font-size: 1.2rem; letter-spacing: 2px; cursor:pointer; color:var(--accent);">TOUT VOIR</div>
+            <h2 style="text-align: center; margin-bottom: 50px; letter-spacing: 5px;">COLLECTIONS</h2>
+            <div style="text-align: center; display: flex; flex-direction: column; gap: 30px;">
+                <div onclick="filterCat('Femme')" style="font-size: 1.5rem; letter-spacing: 3px; cursor:pointer;">FEMME</div>
+                <div onclick="filterCat('Homme')" style="font-size: 1.5rem; letter-spacing: 3px; cursor:pointer;">HOMME</div>
+                <div onclick="filterCat('Lingerie')" style="font-size: 1.5rem; letter-spacing: 3px; cursor:pointer;">LINGERIE</div>
+                <div onclick="location.reload()" style="font-size: 1rem; color: var(--accent); cursor:pointer; margin-top: 20px;">VOIR TOUT</div>
             </div>
         </div>
     </div>
@@ -197,7 +154,6 @@
         const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
         
         let allProducts = [];
-        let cart = [];
 
         async function loadProducts() {
             try {
@@ -206,69 +162,57 @@
                 const json = JSON.parse(text.substr(47).slice(0, -2));
                 allProducts = json.table.rows.map(row => ({
                     titre: row.c[0]?.v || "Pièce Unique",
-                    prix: row.c[1]?.v || 0,
-                    image: row.c[2]?.v || "https://via.placeholder.com/400x600",
-                    cat: row.c[3]?.v || "Nouveauté"
+                    prix: row.c[1]?.v || "Sur demande",
+                    image: row.c[2]?.v || "",
+                    cat: row.c[3]?.v || "Curation",
+                    link: row.c[4]?.v || "#" // VOTRE COLONNE E : Lien d'affiliation
                 }));
                 display(allProducts);
             } catch (e) { 
-                document.getElementById('catalog').innerHTML = "<p style='text-align:center;'>Vérifiez la connexion à votre catalogue.</p>";
+                document.getElementById('catalog').innerHTML = "<p>Erreur de connexion.</p>";
             }
         }
 
         function display(products) {
             document.getElementById('catalog').innerHTML = products.map((p, index) => `
-                <div class="card">
-                    ${p.image.includes('.mp4') ? `<video src="${p.image}" autoplay muted loop playsinline></video>` : `<img src="${p.image}" loading="lazy">`}
+                <div class="card" onclick="showProduct(${index})">
+                    <div class="img-container">
+                        ${p.image.includes('.mp4') ? `<video src="${p.image}" autoplay muted loop></video>` : `<img src="${p.image}" loading="lazy">`}
+                    </div>
                     <div class="card-info">
+                        <div class="card-cat">${p.cat}</div>
                         <div class="card-title">${p.titre}</div>
                         <div class="price">${p.prix} FCFA</div>
-                        <button class="btn-add" onclick="addToCart(${index})">Ajouter au Panier</button>
+                        <div class="btn-view">Explorer la pièce</div>
                     </div>
                 </div>
             `).join('');
         }
 
-        function addToCart(index) {
-            cart.push(allProducts[index]);
-            updateCart();
-            const btn = event.target;
-            btn.innerText = "AJOUTÉ";
-            btn.style.background = "#c5a059";
-            setTimeout(() => { btn.innerText = "Ajouter au Panier"; btn.style.background = "#121212"; }, 800);
-        }
-
-        function updateCart() {
-            document.getElementById('cart-count').innerText = cart.length;
-            const container = document.getElementById('cart-items');
-            if (cart.length === 0) {
-                container.innerHTML = "<p style='text-align:center; color:#999; margin-top:50px;'>Votre panier est vide.</p>";
-                document.getElementById('cart-total').innerText = "0 FCFA";
-                return;
-            }
-            let total = 0;
-            container.innerHTML = cart.map((item, i) => {
-                total += parseInt(item.prix);
-                return `<div class="cart-item">
-                    <span style="font-size:0.8rem;">${item.titre}</span>
-                    <span style="font-size:0.8rem; font-weight:bold;">${item.prix} FCFA <i class="fas fa-times remove-item" onclick="removeFromCart(${i})"></i></span>
-                </div>`;
-            }).join('');
-            document.getElementById('cart-total').innerText = `${total} FCFA`;
-        }
-
-        function removeFromCart(i) { cart.splice(i, 1); updateCart(); }
-
-        function sendWhatsApp() {
-            if (cart.length === 0) return;
-            let msg = "Bonjour Universal Store, je souhaite commander ces pièces :\n\n";
-            cart.forEach(item => msg += `• ${item.titre} - ${item.prix} FCFA\n`);
-            msg += `\nTotal : ${document.getElementById('cart-total').innerText}`;
-            window.open(`https://wa.me/237694859575?text=${encodeURIComponent(msg)}`);
+        function showProduct(index) {
+            const p = allProducts[index];
+            const detail = document.getElementById('product-detail');
+            detail.innerHTML = `
+                <div class="modal-grid">
+                    <div>
+                        ${p.image.includes('.mp4') ? `<video src="${p.image}" autoplay muted loop style="width:100%"></video>` : `<img src="${p.image}" style="width:100%">`}
+                    </div>
+                    <div>
+                        <div class="card-cat">${p.cat}</div>
+                        <h2 style="font-size: 2rem; margin-bottom: 20px;">${p.titre}</h2>
+                        <p style="font-size: 1.5rem; color: var(--accent); margin-bottom: 30px;">${p.prix} FCFA</p>
+                        <p style="color: #666; margin-bottom: 40px;">Cette pièce incarne l'esprit Universal Store. Une coupe irréprochable et un style qui traverse le temps.</p>
+                        
+                        <a href="${p.link}" target="_blank" class="btn-buy">Vérifier la disponibilité</a>
+                        <a href="https://wa.me/237694859575?text=Je souhaite en savoir plus sur : ${p.titre}" class="btn-buy btn-wa">Conseil personnalisé</a>
+                    </div>
+                </div>
+            `;
+            openModal('productModal');
         }
 
         function filterCat(c) { display(allProducts.filter(p => p.cat === c)); closeModal('catModal'); }
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+        function openModal(id) { document.getElementById(id).style.display = 'block'; document.body.style.overflow = 'hidden'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = 'auto'; }
 
         loadProducts();
